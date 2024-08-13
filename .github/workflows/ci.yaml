@@ -18,8 +18,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin' # Or 'zulu' or 'adopt' depending on the distribution you prefer
 
       - name: Run sample script
         run: echo Hello, world
@@ -36,9 +35,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin'
 
       - name: Cache Gradle
         uses: actions/cache@v2
@@ -71,9 +68,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin'
 
       - name: Run tests
         run: ./gradlew test
@@ -87,7 +82,7 @@ jobs:
   instrumentation-test:
     name: Perform Instrumentation Testing
     needs: [unit-test]
-    runs-on: macos-latest # MacOS runs faster
+    runs-on: macos-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -96,12 +91,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin'
 
       - name: Run espresso tests
-        uses: reactivecircus/android-emulator-runner@v2 # 3rd party tool
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew connectedCheck
@@ -124,9 +117,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin'
 
       - name: SonarCloud Scan
         run: ./gradlew app:sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
@@ -145,9 +136,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        
-      - name: Set JAVA_HOME
-        run: echo "JAVA_HOME=\$(dirname \$(dirname \$(readlink -f \$(which java))))" >> $GITHUB_ENV
+          distribution: 'temurin'
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
