@@ -23,7 +23,7 @@
 </p>
 <br>
 <p>
-  Hello there! Android devs👋, This article how to develop and maintain easy building, flexible maintenance, automated deployment and other DevOps operations for android applications using GitHub Actions and deployment in Google Play Store! Lets go 🚀  
+  Hello there! Android devs👋, This article how to develop and maintain easy building, flexible maintenance, automated deployment and other DevOps operations for android applications using GitHub Actions and deployment in Google Play Store! Lets g-o 🚀  
 </p>
 
 
